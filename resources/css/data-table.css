@@ -1,0 +1,126 @@
+.data-pembayaran {
+	margin: 1rem 0;
+}
+.table-wrapper {
+	overflow-x: auto;
+}
+.table {
+	margin: 1rem 0;
+}
+.table tr td:nth-child(1), .table tr td:nth-last-child(1) {
+	text-align: center;
+}
+.data-pembayaran .head {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	grid-gap: 1rem;
+	margin-bottom: 0.75rem;
+}
+.data-pembayaran .head .form-select {
+	display: inline-block;
+}
+.data-pembayaran .footer {
+	display: flex;
+	flex-wrap: wrap;
+	grid-row-gap: 1rem;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 0.5rem;
+}
+.data-card {
+	border: 1px solid #e9ebec;
+	border-radius: 4px;
+	margin-top: 1.5rem;
+}
+.data-card .card-header {
+	padding: 1rem 1.5rem;
+	/*display: flex;
+	grid-gap: 0.75rem;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;*/
+}
+/*.data-card .card-header > div {
+	display: flex;
+	grid-gap: 0.75rem;
+	margin-bottom: 0.75rem;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}*/
+.data-card .card-header {
+	display: flex;
+	/*grid-gap: 0.5rem;*/
+	grid-row-gap: 0.75rem;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+.data-card .card-header > div {
+	width: 50%;
+}
+.data-card .card-header > div:nth-child(even) {
+	text-align: right;
+}
+.data-card .card-header .form-select, .card-header input[type=date] {
+	display: inline-block;
+}
+.data-card .card-header .input-group-btn {
+	display: inline-flex;
+}
+.data-card .card-body {
+	padding: 1rem 1.5rem;
+	border-top: none;
+}
+.card-header ~ .card-body {
+	border-top: 1px solid #e9ebec;
+}
+.data-card .card-body .footer {
+	display: flex;
+	flex-wrap: wrap;
+	grid-row-gap: 1rem;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 0.5rem;
+}
+.data-card .table td.action {
+	display: flex;
+	grid-gap: .75rem;
+}
+.data-card .table td.action a svg {
+	display: block;
+}
+.table td.action-popover {
+	position: relative;
+}
+.table td .action-menu {
+	position: absolute;
+	right: 0;
+	top: 85%;
+	z-index: 10;
+	min-width: 80px;
+	max-width: 400px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 0.85rem;
+	text-align: left;
+	box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+}
+.table td .action-menu li:hover {
+	background-color: #f6f6f6;
+}
+.table td .action-menu a {
+	display: inline-block;
+	width: 100%;
+	padding: 0.65rem 1rem;
+	text-decoration: none;
+	color: #000;
+}
+
+@media (max-width: 640px) {
+	.data-card .card-header > div {
+		width: 100%;
+	}
+}

@@ -1,0 +1,35 @@
+.table-list {
+	display: flex;
+	margin-top: 1.5rem;
+	flex-wrap: wrap;
+	grid-gap: 1.5rem;
+}
+.table-list .card {
+	padding: 1.5rem;
+	border: 1px solid #e9ebec;
+	border-radius: 4px;
+	flex-grow: 1;
+}
+.table-list .card .table-count {
+	margin-top: 0.75rem;
+	display: flex;
+	grid-gap: 1rem;
+	align-items: center;
+}
+.table-list .card .table-count > svg, .table-list .card > h3 {
+	color: #495057;
+}
+.table-list svg {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+.table-list .card > h3 {
+	font-weight: 500;
+}
+.table-list.five-cards {
+	grid-gap: 1rem;
+}
+.table-list.five-cards .card {
+	width: fit-content;
+	max-width: 20%;
+}

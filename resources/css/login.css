@@ -1,0 +1,38 @@
+#login {
+	max-width: 1024px;
+	margin: auto;
+	padding: 6rem 0;
+	display: flex;
+	justify-content: space-between;
+}
+#login .login-img, #login .login-form {
+	width: 45%;
+}
+.login-img img {
+	width: 100%;
+}
+.login-form {
+	padding: 2rem 1rem;
+}
+.login-form > div, .login-form h1 {
+	margin-bottom: 1.5rem;
+}
+.login-form .form-input {
+	margin-top: 0.5rem;
+	width: 100%;
+}
+@media (max-width: 640px) {
+	#login {
+		padding: 0;
+	}
+	.login-img {
+		display: none;
+	}
+	#login .login-form {
+		width: 100%;
+		padding: 2rem 1.5rem;
+	}
+	.login-form h1 {
+		text-align: center;
+	}
+}
