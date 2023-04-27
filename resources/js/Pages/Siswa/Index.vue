@@ -82,10 +82,11 @@
 	// 	console.log(dropdownActive.value)
 	// })
 
-	const props = defineProps({data: Object})
+	const props = defineProps({data: Object, count: Number})
 
 	const selectAll = ref(false)
-	watch(selectAll, value => selected.value = value ? props.data.data.map(siswa => siswa.nis) : [])
+	// watch(selected, value => selectAll.value = selected.value.length == Object.values(props.data.data).length)
+	watch(selectAll, value => selected.value = value ? Object.values(props.data.data).map(siswa => siswa.nis) : [])
 </script>
 <template>
 	<Head title="Data Siswa" />
@@ -171,7 +172,7 @@
 										<option value="25">25</option>
 										<option value="50">50</option>
 										<option value="100">100</option>
-									</select> dari {{ data.data.length }} Data
+									</select> dari {{ count }} Data
 							</div>
 							<Link href="/siswa/alumni">Lihat siswa alumni</Link>
 						</div>
