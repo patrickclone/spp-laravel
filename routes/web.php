@@ -19,8 +19,6 @@ use App\Http\Controllers\PembayaranController;
 |
 */
 
-// Hanya commit
-
 Route::inertia('/', 'Test', ['title' => 'Dashboard'])->middleware('auth');
 Route::inertia('/login', 'Auth/Login')->middleware('guest')->name('login');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');

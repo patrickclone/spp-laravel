@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Siswa;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreSiswaRequest;
 use App\Http\Requests\UpdateSiswaRequest;
@@ -19,6 +20,7 @@ class SiswaController extends Controller
     {
         $limit = $request->limit ?? 10;
         $search = $request->search ?? '';
+        $count = Db::table('siswa')->where('tahun_masuk', '>', angkatanSekarang()-3)->count();
         $data = Siswa::with('kelas')->where('tahun_masuk', '>', angkatanSekarang()-3)->get()->filter(function ($item) use($search){
                 return str_contains(strtolower($item->nama), $search) || $search == '';
         })->paginate($limit)->withQueryString()->through(fn($siswa) => [
@@ -30,7 +32,7 @@ class SiswaController extends Controller
             'alamat' => $siswa->alamat,
         ]);
         // dd($data);
-        return Inertia::render('Siswa/Index', ['data' => $data]);
+        return Inertia::render('Siswa/Index', ['data' => $data, 'count' => $count]);
     }
 
     /**
@@ -63,6 +65,7 @@ class SiswaController extends Controller
      */
     public function edit(Siswa $siswa)
     {
+        $siswa->password = '';
         return Inertia::render('Siswa/Tambah', [
             'edit' => true,
             'siswa' => $siswa,
@@ -75,7 +78,10 @@ class SiswaController extends Controller
      */
     public function update(UpdateSiswaRequest $request, Siswa $siswa)
     {
-        //
+        if ($siswa->update($request->validated())) {
+            return redirect('/siswa')->with('alert', ['success', 'Data berhasil diubah']);
+        }
+        return redirect('/siswa')->with('alert', ['error', 'Data gagal diubah']);
     }
 
     /**

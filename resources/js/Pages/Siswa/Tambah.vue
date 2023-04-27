@@ -20,7 +20,7 @@
 <template>
 	<Head :title="(edit ? 'Edit' : 'Tambah') + ' Data Siswa'" />
 	<Layout :title="(edit ? 'Edit' : 'Tambah') + ' Data Siswa'">
-		<form action="" method="post" class="form-half" @submit.prevent="form.post('/siswa')">
+		<form action="" method="post" class="form-half" @submit.prevent="edit ? form.put('/siswa/'+siswa.nis) : form.post('/siswa')">
 			<div class="mb-3">
 				<label for="nis" class="form-label">NIS</label>
 				<input type="number" id="nis" name="nis" class="form-input" :class="{'invalid': form.errors.nis}" placeholder="Masukkan NIS" v-model="form.nis">
@@ -44,7 +44,7 @@
 				</select>
 				<div class="input-error" v-if="form.errors.id_kelas">{{ form.errors.id_kelas }}</div>
 			</div>
-			<PasswordInput v-model="form.password" :error="form.errors.password" />
+			<PasswordInput v-model="form.password" :error="form.errors.password" :edit="props.edit" />
 			<div class="mb-3">
 				<label for="no_telp" class="form-label">No. Telp.</label>
 				<input type="text" name="no_telp" id="no_telp" class="form-input" :class="{'invalid': form.errors.no_telp}" placeholder="Masukkan nomor telepon Indonesia valid" v-model="form.no_telp">
