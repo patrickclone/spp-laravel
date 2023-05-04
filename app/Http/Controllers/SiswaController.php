@@ -35,6 +35,24 @@ class SiswaController extends Controller
         return Inertia::render('Siswa/Index', ['data' => $data, 'count' => $count]);
     }
 
+    public function search(Request $request)
+    {
+        $limit = $request->limit ?? 10;
+        $search = $request->search ?? '';
+        $count = Db::table('siswa')->where('tahun_masuk', '>', angkatanSekarang()-3)->count();
+        $data = Siswa::with('kelas')->where('tahun_masuk', '>', angkatanSekarang()-3)->get()->filter(function ($item) use($search){
+                return str_contains(strtolower($item->nama), $search) || $search == '';
+        })->paginate($limit)->withQueryString()->through(fn($siswa) => [
+            'nis' => $siswa->nis,
+            'nama' => $siswa->nama,
+            'kelas' => $siswa->kelas->kelas,
+            'id_kelas' => $siswa->kelas->id,
+            'no_telp' => $siswa->no_telp,
+            'alamat' => $siswa->alamat,
+        ]);
+        return json_encode($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

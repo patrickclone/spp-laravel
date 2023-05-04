@@ -27,6 +27,7 @@ Route::get('/pembayaran', [PembayaranController::class, 'pembayaran'])->middlewa
 Route::get('/pembayaran/history', [PembayaranController::class, 'history'])->middleware('auth');
 Route::post('/pembayaran/bayar', [PembayaranController::class, 'bayar'])->middleware('auth');
 Route::resource('/siswa', SiswaController::class)->middleware('auth');
+Route::post('/siswa/search', [SiswaController::class, 'search'])->middleware('auth');
 Route::post('/siswa/delete', [SiswaController::class, 'delete'])->middleware('auth');
 // Route::get('/siswa', [SiswaController::class, 'index'])->middleware('auth');
 // Route::inertia('/siswa', 'Siswa/Index', ['data' => Siswa::with('kelas')->get()->paginate(10)])->middleware('auth');
