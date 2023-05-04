@@ -1,10 +1,11 @@
 <script setup>
-	import { ref, watch,computed } from 'vue'
+	import { ref, reactive, watch,computed } from 'vue'
 	import { Head, Link, router } from '@inertiajs/vue3'
 	import Layout from '../../Layout.vue'
 	import Pagination from '../../components/Pagination.vue'
 	import '../../../css/data-table.css'
 	import Swal from 'sweetalert2'
+	import axios from 'axios'
 
 	const limit = ref(10)
 	const search = ref('')
@@ -84,9 +85,36 @@
 
 	const props = defineProps({data: Object, count: Number})
 
+	const data = ref(props.data)
+
 	const selectAll = ref(false)
 	// watch(selected, value => selectAll.value = selected.value.length == Object.values(props.data.data).length)
 	watch(selectAll, value => selected.value = value ? Object.values(props.data.data).map(siswa => siswa.nis) : [])
+	let controller = reactive({})
+	const delayId = ref(null)
+	watch(search, value => {
+		// if (controller.toString() == '[object AbortController]') {
+		// 	controller.abort()
+		// 	console.log(controller)
+		// }
+		if (delayId) {
+			clearTimeout(delayId.value)
+		}
+		delayId.value = setTimeout(() => {
+			const formData = new FormData()
+			formData.append('search', value)
+			controller = new AbortController()
+			axios.post('/siswa/search', formData, {
+				signal: controller.signal,
+			})
+			.then(res => {
+				data.value = res.data
+				delayId.value = null
+			})
+			.catch(err => console.log('cancelled'))
+		}, 350)
+		// .then(res => console.log(res))
+	})
 </script>
 <template>
 	<Head title="Data Siswa" />
